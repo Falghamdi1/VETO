@@ -18,7 +18,7 @@ python main.py --dataset data/headline_sales.csv
 2. The **Adversary** agent runs a deterministic statistical battery and **vetoes the commit**: controlling for deal size, the effect *reverses sign* (naive −0.043 → controlled **+0.025**, p = 0.002). Region B is actually the strongest region in every segment — it just carries the hardest deal mix. Approved as-is, this would have defunded the best team in the company.
 3. The Analyst **self-corrects** — reruns with the required control, the corrected recommendation passes the battery, the gate signs, and the action executes to a Teams channel with a full audit trail.
 
-![The reversal](demo/screenshots/reversal.png)
+
 
 Maybe we rigged that dataset? **We did — deliberately, with a seeded generator that's in this repo** (`data/generators/make_datasets.py`). That's why the other datasets exist:
 
