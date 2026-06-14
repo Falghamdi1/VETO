@@ -1,0 +1,220 @@
+[
+  {
+    "t": 1781475224.0615919,
+    "kind": "proposal",
+    "cycle": 1,
+    "proposal": {
+      "claim": "region=B underperforms on converted",
+      "outcome": "converted",
+      "treatment": "region",
+      "treatment_focus": "B",
+      "evidence": "region=B mean converted=0.0907 vs region=A=0.1440 (gap 0.0532, n=4000)",
+      "proposed_action": {
+        "type": "teams_post",
+        "severity": "high",
+        "text": "RECOMMENDATION: region 'B' is the weakest performer on converted. Reallocate its budget and headcount to 'A' effective next quarter."
+      },
+      "analysis_code_summary": "df.groupby('region')['converted'].mean()",
+      "controls_applied": [],
+      "confidence": 0.86
+    }
+  },
+  {
+    "t": 1781475224.9433844,
+    "kind": "review",
+    "cycle": 1,
+    "state": "VETOED",
+    "override": null,
+    "adversary_verdict": {
+      "verdict": "VETO",
+      "battery_run_id": "run_0225091f",
+      "fired_checks": [
+        {
+          "check": "confounding",
+          "detail": "naive effect of region=B on converted: -0.0429 (p=0.0000)",
+          "evidence": [
+            {
+              "confounder": "deal_size",
+              "naive_coef": -0.0429,
+              "naive_p": 0.0,
+              "controlled_coef": 0.0247,
+              "controlled_p": 0.00195,
+              "sign_reversal": true,
+              "relative_shift": 1.576,
+              "required_control": "include deal_size as a covariate / stratify by deal_size"
+            }
+          ]
+        }
+      ],
+      "passed_checks": [
+        "power",
+        "multiplicity",
+        "distribution_shift"
+      ],
+      "narrative": "Commit blocked. [confounding] naive effect of region=B on converted: -0.0429 (p=0.0000)"
+    },
+    "battery": {
+      "run_id": "run_0225091f",
+      "results": [
+        {
+          "check": "confounding",
+          "fired": true,
+          "summary": "naive effect of region=B on converted: -0.0429 (p=0.0000)",
+          "details": [
+            {
+              "confounder": "deal_size",
+              "naive_coef": -0.0429,
+              "naive_p": 0.0,
+              "controlled_coef": 0.0247,
+              "controlled_p": 0.00195,
+              "sign_reversal": true,
+              "relative_shift": 1.576,
+              "required_control": "include deal_size as a covariate / stratify by deal_size"
+            }
+          ]
+        },
+        {
+          "check": "power",
+          "fired": false,
+          "summary": "d=-0.133, achieved power=1.00, 95% bootstrap CI=[-0.0546, -0.0311]",
+          "details": []
+        },
+        {
+          "check": "multiplicity",
+          "fired": false,
+          "summary": "single comparison; correction not applicable",
+          "details": []
+        },
+        {
+          "check": "distribution_shift",
+          "fired": false,
+          "summary": "no period column; shift check not applicable",
+          "details": []
+        }
+      ]
+    },
+    "required_controls": [
+      "include deal_size as a covariate / stratify by deal_size"
+    ]
+  },
+  {
+    "t": 1781475225.552018,
+    "kind": "proposal",
+    "cycle": 2,
+    "proposal": {
+      "claim": "region=B OUTPERFORMS within every deal_size segment; the pooled gap is a composition effect",
+      "outcome": "converted",
+      "treatment": "region",
+      "treatment_focus": "B",
+      "evidence": "stratified means by deal_size: enterprise: A=0.0473, B=0.0754, C=0.0555; smb: A=0.1615, B=0.1823, C=0.1456",
+      "proposed_action": {
+        "type": "teams_post",
+        "severity": "high",
+        "text": "CORRECTED RECOMMENDATION: controlling for deal_size, region 'B' is the STRONGEST performer in every segment. Its pooled average is dragged down by a harder deal_size mix. Do NOT cut 'B'; rebalance segment assignment and share its playbook instead."
+      },
+      "analysis_code_summary": "df.groupby(['deal_size','region'])['converted'].mean()",
+      "controls_applied": [
+        "deal_size"
+      ],
+      "confidence": 0.93
+    }
+  },
+  {
+    "t": 1781475226.3469677,
+    "kind": "review",
+    "cycle": 2,
+    "state": "APPROVED",
+    "override": null,
+    "adversary_verdict": {
+      "verdict": "APPROVE",
+      "battery_run_id": "run_d35341a7",
+      "fired_checks": [],
+      "passed_checks": [
+        "power",
+        "multiplicity",
+        "distribution_shift"
+      ],
+      "narrative": "All applicable checks passed. Commit signed."
+    },
+    "battery": {
+      "run_id": "run_d35341a7",
+      "results": [
+        {
+          "check": "power",
+          "fired": false,
+          "summary": "d=-0.133, achieved power=1.00, 95% bootstrap CI=[-0.0546, -0.0311]",
+          "details": []
+        },
+        {
+          "check": "multiplicity",
+          "fired": false,
+          "summary": "single comparison; correction not applicable",
+          "details": []
+        },
+        {
+          "check": "distribution_shift",
+          "fired": false,
+          "summary": "no period column; shift check not applicable",
+          "details": []
+        }
+      ]
+    },
+    "required_controls": []
+  },
+  {
+    "t": 1781475226.9476855,
+    "kind": "execution",
+    "action": {
+      "type": "teams_post",
+      "severity": "high",
+      "text": "CORRECTED RECOMMENDATION: controlling for deal_size, region 'B' is the STRONGEST performer in every segment. Its pooled average is dragged down by a harder deal_size mix. Do NOT cut 'B'; rebalance segment assignment and share its playbook instead."
+    },
+    "result": {
+      "channel": "local",
+      "status": "rendered",
+      "card": {
+        "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+        "type": "AdaptiveCard",
+        "version": "1.4",
+        "body": [
+          {
+            "type": "TextBlock",
+            "size": "Large",
+            "weight": "Bolder",
+            "text": "\u2705 VETO-signed recommendation"
+          },
+          {
+            "type": "TextBlock",
+            "wrap": true,
+            "text": "CORRECTED RECOMMENDATION: controlling for deal_size, region 'B' is the STRONGEST performer in every segment. Its pooled average is dragged down by a harder deal_size mix. Do NOT cut 'B'; rebalance segment assignment and share its playbook instead."
+          },
+          {
+            "type": "FactSet",
+            "facts": [
+              {
+                "title": "Claim",
+                "value": "region=B OUTPERFORMS within every deal_size segment; the pooled gap is a composition effect"
+              },
+              {
+                "title": "Evidence",
+                "value": "stratified means by deal_size: enterprise: A=0.0473, B=0.0754, C=0.0555; smb: A=0.1615, B=0.1823, C=0.1456"
+              },
+              {
+                "title": "Controls applied",
+                "value": "deal_size"
+              },
+              {
+                "title": "Battery run",
+                "value": "run_d35341a7"
+              },
+              {
+                "title": "Checks passed",
+                "value": "power, multiplicity, distribution_shift"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

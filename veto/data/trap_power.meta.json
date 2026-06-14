@@ -1,0 +1,9 @@
+{
+  "outcome": "activation_score",
+  "treatment": "variant",
+  "candidate_confounders": [],
+  "metric_columns": [
+    "activation_score"
+  ],
+  "story": "onboarding A/B with an underpowered 'trend'"
+}

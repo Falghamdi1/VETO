@@ -1,0 +1,11 @@
+{
+  "outcome": "converted",
+  "treatment": "region",
+  "candidate_confounders": [
+    "deal_size"
+  ],
+  "metric_columns": [
+    "converted"
+  ],
+  "story": "regional sales conversion; naive view says cut Region B"
+}

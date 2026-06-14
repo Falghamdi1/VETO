@@ -1,0 +1,28 @@
+{
+  "outcome": "metric_20",
+  "treatment": "variant",
+  "candidate_confounders": [],
+  "metric_columns": [
+    "metric_01",
+    "metric_02",
+    "metric_03",
+    "metric_04",
+    "metric_05",
+    "metric_06",
+    "metric_07",
+    "metric_08",
+    "metric_09",
+    "metric_10",
+    "metric_11",
+    "metric_12",
+    "metric_13",
+    "metric_14",
+    "metric_15",
+    "metric_16",
+    "metric_17",
+    "metric_18",
+    "metric_19",
+    "metric_20"
+  ],
+  "story": "20-metric scan; one nominal hit that dies under FDR"
+}
